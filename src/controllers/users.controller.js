@@ -1,4 +1,7 @@
-export const getAllUsers = (req, res) => {
-  console.log("Get all users");
+const getAllUsers = (req, res) => {
   res.send("Get all users");
+};
+
+module.exports = {
+  getAllUsers,
 };
