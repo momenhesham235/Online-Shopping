@@ -4,5 +4,107 @@
 <!-- navbar -->
 <%- include('../components/navbar.ejs') %>
 
+<main style="padding-top: 100px; height: 1000px">
+  <!-- filter section start -->
+  <section class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <h2>Filter</h2>
+      </div>
+      <div class="col-md-9">
+        <form id="filterForm" action="/" method="get" class="mb-3">
+          <select id="selectOption" name="category" class="form-select">
+            <optgroup label="All Categories">
+              <option value="all">All</option>
+            </optgroup>
+            <optgroup label="Clothes">
+              <option value="clothes">All Clothes</option>
+              <option value="T-Shirt">T-Shirt</option>
+              <option value="Trousers">Trousers</option>
+              <option value="Shoes">Shoes</option>
+              <option value="Socks">Socks</option>
+              <option value="Suits">Suits</option>
+              <option value="Jacket">Jacket</option>
+            </optgroup>
+            <optgroup label="Electronic">
+              <option value="electronic">All Electronic</option>
+              <option value="Laptop">Laptop</option>
+              <option value="Mobile">Mobile</option>
+              <option value="Tablet">Tablet</option>
+            </optgroup>
+            <optgroup label="Furniture">
+              <option value="furniture">All Furniture</option>
+              <option value="Sofa">Sofa</option>
+              <option value="Chair">Chair</option>
+              <option value="Table">Table</option>
+            </optgroup>
+          </select>
+          <button type="submit" id="hiddenSubmit"></button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- filter section end -->
+
+  <!-- products start -->
+  <div class="container">
+    <h1 class="text-center">Products</h1>
+    <div class="row">
+      <% if (products.length == 0) { %>
+      <h1 class="text-center">No Products Found</h1>
+      <% } else { %> <% for( let index = 0; index < products.length; index++ ) {
+      %>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+        <div class="card">
+          <img
+            src="<%= products[index].image %>"
+            class="card-img-top"
+            alt="..."
+            style="height: 200px; object-fit: fill"
+          />
+          <div class="card-body">
+            <h5 class="card-title">
+              <a
+                class="text-decoration-none"
+                href="/product/<%= products[index]._id %>"
+                ><%= products[index].name %></a
+              >
+            </h5>
+            <p class="card-text">Price: <%= products[index].price %> $</p>
+            <form action="/cart" method="POST">
+              <input type="number" name="quantity" value="1" class="form-control
+              mb-2" " />
+              <button type="submit" class="btn btn-primary">Add To Cart</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <% } %> <% } %>
+    </div>
+  </div>
+  <!-- products end -->
+</main>
+
+<script>
+  const filterForm = document.getElementById("filterForm");
+  const selectOption = document.getElementById("selectOption");
+  const hiddenSubmit = document.getElementById("hiddenSubmit");
+
+  filterForm.addEventListener("submit", function (e) {
+    console.log("Form submit event triggered");
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    // Add your logic here before submitting the form if needed
+
+    // Log to check if this point is reached
+    console.log("Form submission prevented");
+
+    // Submit the form programmatically
+    hiddenSubmit.addEventListener("click", function () {
+      filterForm.submit();
+    });
+  });
+</script>
+
 <!-- footer -->
 <%- include('../components/footer.ejs') %>

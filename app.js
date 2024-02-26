@@ -10,8 +10,9 @@ dotenv.config({
 });
 const db = require("./src/config/db");
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "src", "views"));
 app.use(express.static(path.join(__dirname, "public")));
+app.set("views", path.join(__dirname, "src", "views"));
+app.use("uploads", express.static(path.join(__dirname, "src", "uploads")));
 
 // API Routes
 mainRoutes(app);

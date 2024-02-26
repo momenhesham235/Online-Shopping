@@ -1,0 +1,40 @@
+<!-- header -->
+<%- include('../components/header.ejs') %>
+
+<!-- navbar -->
+<%- include('../components/navbar.ejs') %>
+
+<!-- product -->
+<main style="padding-top: 100px; height: 1000px">
+  <div class="container">
+    <h1 class="text-center">Product Detail</h1>
+    <div class="row shadow-sm bg-dark text-light">
+      <div class="col-md-6">
+        <img
+          src="<%= product.image %>"
+          class="card-img-top"
+          alt="image-product"
+          style="height: 250px; width: 50%; object-fit: fill"
+        />
+      </div>
+      <div class="col-md-6 p-5">
+        <h2><%= product.name %></h2>
+        <p>Price: <%= product.price %> $</p>
+        <p>Description: <%= product.description %></p>
+          <form action="/cart" method="POST">
+        <input
+          type="number"
+          name="quantity"
+          value="1"
+          class="form-control mb-2"
+        />
+        <button type="submit" class="btn btn-primary">Add To Cart</button>
+      </form>
+      </div>
+    
+    </div>
+  </div>
+</main>
+
+<!-- footer -->
+<%- include('../components/footer.ejs') %>
