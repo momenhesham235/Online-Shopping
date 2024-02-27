@@ -5,7 +5,6 @@ const getHome = asyncWrapper(async (req, res) => {
   const reqQuery = { ...req.query };
   console.log(reqQuery);
   const products = await Product.find({ ...reqQuery });
-  console.log(products);
   res.render("pages/home.ejs", { products });
 });
 

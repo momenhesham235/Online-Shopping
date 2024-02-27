@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const morgan = require("morgan");
 const path = require("path");
 const dotenv = require("dotenv");
 const mainRoutes = require("./src/routers/index");
@@ -9,6 +10,10 @@ dotenv.config({
   path: "src/config/.env",
 });
 const db = require("./src/config/db");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// Middleware
+app.use(morgan("dev"));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "src", "views"));
